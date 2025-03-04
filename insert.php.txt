@@ -1,0 +1,27 @@
+<?php
+
+
+$dbc = mysqli_connect("localhost", "root@localhost", "", "controlacceso");
+if(!$dbc) {
+die("DATABASE CONNECTION FAILED:" .mysqli_error($dbc));
+exit();
+}
+$db = "controlacceso";
+$dbs = mysqli_select_db($dbc, $db);
+if(!$dbs) {
+die("DATABASE SELECTION FAILED:" .mysqli_error($dbc));
+exit();
+}
+$id = mysqli_real_escape_string($dbc, $_GET['id']);
+$nombre/Rol = mysqli_real_escape_string($dbc, $_GET['nombre']);
+$rol = mysqli_real_escape_string($dbc, $_GET['rol']);
+$estado = mysqli_real_escape_string($dbc, $_GET['estado']);
+$query = "INSERT INTO registro_tarjetas(id, nombre, rol, estado) VALUES ('$id', '$nombre', '$rol', '$estado')";
+if(mysqli_query($dbc, $query)){
+echo "Records added successfully";
+} 
+else{
+echo "ERROR: Could not able to execute". $query." ". mysqli_error($dbc);
+}
+mysqli_close($dbc);
+?>
